@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from music import music
+import asyncio
 import os
 
 bot = commands.Bot(command_prefix='?', intents = discord.Intents.all())
