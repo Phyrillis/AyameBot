@@ -13,7 +13,7 @@ class music(commands.Cog):
 
     # 2d array containing [song, channel]
     self.music_queue = []
-    self.YDL_OPTIONS = {'format': 'bestaudio', 'yesplaylist':'True'}
+    self.YDL_OPTIONS = {'format': 'bestaudio'}
     self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
     self.vc = ""
@@ -22,7 +22,7 @@ class music(commands.Cog):
   def search_yt(self, item):
       with YoutubeDL(self.YDL_OPTIONS) as ydl:
           try: 
-              info = ydl.extract_info("ytsearch:%s" % item, download=False)['entries'][0]
+              info = ydl.extract_info("ytsearch:%s" % item, url, download=False)['entries'][0]
           except Exception: 
               return False
 
