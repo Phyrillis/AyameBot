@@ -116,7 +116,7 @@ class music(commands.Cog):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_paused():
       await ctx.voice_client.resume()
-      await ctx.send("Paused")
+      await ctx.send("Resumed")
       
   @commands.command(name="stop", help="Stops the bot")
   async def pause(self, ctx):
