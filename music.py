@@ -105,7 +105,28 @@ class music(commands.Cog):
       await self.vc.disconnect()
       
   @commands.command(name="stop", help="Stops the bot")
-  async def pause(self, ctx):
+  async def stop_(self, ctx):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
       await ctx.voice_client.stop()     
+
+  @commands.command(name='now_playing', aliases=['np', 'current', 'currentsong', 'playing'])
+  async def now_playing_(self, ctx):
+    """Display information about the currently playing song."""
+    vc = ctx.voice_client
+
+    if not vc or not vc.is_connected():
+      return await ctx.send('I am not currently connected to voice!', delete_after=20)
+
+      player = self.get_player(ctx)
+      if not player.current:
+          return await ctx.send('I am not currently playing anything!')
+
+      try:
+          # Remove our previous now_playing message.
+          await player.np.delete()
+      except discord.HTTPException:
+          pass
+
+      player.np = await ctx.send(f'**Now Playing:** `{vc.source.title}` '
+                                 f'requested by `{vc.source.requester}`')
