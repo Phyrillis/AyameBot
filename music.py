@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import asyncio
+from async_timeout import timeout
 import youtube_dl
 
 class music(commands.Cog):
