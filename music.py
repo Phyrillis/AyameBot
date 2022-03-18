@@ -108,21 +108,3 @@ class music(commands.Cog):
   async def pause(self, ctx):
     await ctx.voice_client.pause()
     await ctx.send("Paused")
-
-  @command(name='song-info', aliases=['song?', 'nowplaying', 'current-song'])
-    async def song_info(self, msg):
-        """
-        Show information about the current playing song
-        `Ex:` s.song-info
-        `Command:` song-into()
-        """
-        if msg.voice_client is not None and msg.voice_client.is_playing() is True:
-            emb = discord.Embed(colour=self.random_color, title='Currently Playing',
-                                description=self.player[msg.guild.id]['player'].title)
-            emb.set_footer(
-                text=f"{self.player[msg.guild.id]['author'].author.name}", icon_url=msg.author.avatar_url)
-            emb.set_thumbnail(
-                url=self.player[msg.guild.id]['player'].thumbnail)
-            return await msg.send(embed=emb, delete_after=120)
-
-        return await msg.send(f"**No songs currently playing**".title(), delete_after=30)     
