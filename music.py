@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import asyncio
 from async_timeout import timeout
-import youtube_dl
+from youtube_dl import YoutubeDL
 
 class music(commands.Cog):
   def __init__(self, bot):
@@ -13,14 +13,14 @@ class music(commands.Cog):
 
     # 2d array containing [song, channel]
     self.music_queue = []
-    self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'False'}
+    self.YDL_OPTIONS = {'format': 'bestaudio/best', 'noplaylist':'True'}
     self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
     self.vc = ""
 
     #searching the item on youtube
   def search_yt(self, item):
-      with youtube_dl.YoutubeDL(self.YDL_OPTIONS) as ydl:
+      with YoutubeDL(self.YDL_OPTIONS) as ydl:
           try: 
               info = ydl.extract_info("ytsearch:%s" % item, download=False)['entries'][0]
           except Exception: 
