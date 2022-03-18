@@ -106,10 +106,20 @@ class music(commands.Cog):
       
   @commands.command(name="pause", help="Pauses the bot")
   async def pause(self, ctx):
-    await ctx.voice_client.pause()
-    await ctx.send("Paused")
-
+    voice_client = ctx.message.guild.voice_client
+    if voice_client.is_playing():
+      await ctx.voice_client.pause()
+      await ctx.send("Paused")
+    
   @commands.command(name="resume", help="Resumes the bot")
   async def pause(self, ctx):
-    await ctx.voice_client.resume()
-    await ctx.send("Resumed")   
+    voice_client = ctx.message.guild.voice_client
+    if voice_client.is_paused():
+      await ctx.voice_client.resume()
+      await ctx.send("Paused")
+      
+  @commands.command(name="stop", help="Stops the bot")
+  async def pause(self, ctx):
+    voice_client = ctx.message.guild.voice_client
+    if voice_client.is_playing():
+      await ctx.voice_client.stop()     
