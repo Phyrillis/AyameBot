@@ -4,13 +4,9 @@ from music import music
 import asyncio
 import os
 
-bot = commands.Bot(command_prefix='?', intents = discord.Intents.all())
+activity = discord.Game(name="with humans")
 
-@bot.event
-async def on_ready():
-  await bot.change_presence(activity=discord.Game(name="with humans"))
-  
-  print("Ready")
+bot = commands.Bot(command_prefix='?', activity=activity, intents = discord.Intents.all())
 
 bot.add_cog(music(bot))
 
