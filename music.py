@@ -75,7 +75,7 @@ class music(commands.Cog):
       else:
           song = self.search_yt(query)
           if type(song) == type(True):
-              await ctx.send("Could not download the song. Incorrect format try another keyword. This could be due to playlist or a livestream format.")
+              await ctx.send("I'm sorry but I could not play the song or playlist...")
           else:
               await ctx.send("Song added to the queue")
               self.music_queue.append([song, voice_channel])
