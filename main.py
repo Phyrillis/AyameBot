@@ -6,7 +6,7 @@ import os
 
 bot = commands.Bot(command_prefix='?', intents = discord.Intents.all())
 
-@client.event
+@bot.event
 async def on_ready():
   await bot.change_presence(activity=discord.Game(name="with humans"))
   
